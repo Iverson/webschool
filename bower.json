@@ -1,0 +1,22 @@
+{
+  "name": "webschool",
+  "version": "0.0.0",
+  "homepage": "https://github.com/Iverson/webschool",
+  "authors": [
+    "Iverson <iversonallen@yandex.ru>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.2.0",
+    "codemirror": "~4.5.0",
+    "mustache.js": "~0.8.2",
+    "ractive": "~v0.5.7"
+  }
+}

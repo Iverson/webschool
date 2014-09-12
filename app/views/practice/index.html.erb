@@ -1,0 +1,15 @@
+<div class="b-practice"></div>
+
+<script>
+  new Views.PracticeSandbox({
+    data: {
+      tabs: [
+        { name: "index.html", content: "<Codearea lang='text/html' />"},
+        { name: "style.css", content: "<Codearea lang='css' />"},
+        { name: "app.js", content: "<Codearea lang='javascript' />"}
+      ],
+      template: JST['templates/practice/iframe']()
+    }
+  })
+
+</script>

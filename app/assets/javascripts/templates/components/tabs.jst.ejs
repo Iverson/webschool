@@ -1,0 +1,13 @@
+<ul class="nav nav-tabs" role="tablist">
+  {{#tabs:i}}
+    <li class="{{isActive(i) ? 'active' : ''}}"><a href="#" on-click="selectTab" data-index="{{i}}">{{name}}</a></li>
+  {{/tabs}}
+</ul>
+<div class="tab-content">
+  {{#tabs:i}}
+    {{setPartial(content)}}
+    <div class="tab-pane {{isActive(i) ? 'active' : ''}}" id="js">
+      {{>tabContent}}
+    </div>
+  {{/tabs}}
+</div>

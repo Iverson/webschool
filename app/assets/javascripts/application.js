@@ -10,7 +10,18 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
-//= require jquery_ujs
-//= require turbolinks
+//= require jquery/dist/jquery
+//= require bootstrap
+//= require ractive
+//= require mustache.js/mustache.js
+//= require codemirror
+//= require codemirror/mode/javascript/javascript
+//= require codemirror/mode/css/css
+//= require codemirror/mode/xml/xml
+//= require codemirror/addon/search/search
+//= require codemirror/addon/edit/closebrackets
+//= require codemirror/addon/fold/foldcode
+//= require codemirror/addon/fold/foldgutter
+//= require app
+//= require_tree ./services
 //= require_tree .

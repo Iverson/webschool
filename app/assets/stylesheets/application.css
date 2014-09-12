@@ -10,6 +10,18 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
+ *= require bootstrap/dist/css/bootstrap
+ *= require codemirror
+ *= require codemirror/addon/dialog/dialog
+ * require_tree .
  *= require_self
  */
+
+.container-fluid {
+    padding-top: 50px;
+}
+
+.b-sandbox-result {
+    width: 100%;
+    height: 300px;
+}
