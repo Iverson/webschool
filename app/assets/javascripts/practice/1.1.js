@@ -12,8 +12,3 @@ reporter.afterDone(function() {
 });
 
 jasmine.getEnv().addReporter(reporter);
-// jasmine.getEnv().execute(); 
-
-// $(document).ready(function() {
-//     console.log('WINOD');
-// });
