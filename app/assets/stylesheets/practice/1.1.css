@@ -1,5 +1,6 @@
 /*
  *= require reset
+ *= require jasmine/lib/jasmine-core/jasmine
  *= require_tree .
  *= require_self
  */

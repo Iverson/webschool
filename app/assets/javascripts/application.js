@@ -14,7 +14,10 @@
 //= require bootstrap
 //= require ractive
 //= require mustache.js/mustache.js
+//= require highlightjs/highlight.pack
 //= require codemirror
+//= require emmet-codemirror/dist/emmet
+//= require codemirror/keymap/sublime
 //= require codemirror/mode/javascript/javascript
 //= require codemirror/mode/css/css
 //= require codemirror/mode/xml/xml
@@ -24,4 +27,5 @@
 //= require codemirror/addon/fold/foldgutter
 //= require app
 //= require_tree ./services
-//= require_tree .
+//= require_tree ./templates
+//= require_tree ./views

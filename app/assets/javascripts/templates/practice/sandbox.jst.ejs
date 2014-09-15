@@ -1,11 +1,12 @@
 <div class="col-sm-5">
   <h2>Side</h2>
-  <div class="panel panel-default">
-    <div class="panel-heading">Title</div>
-    <div class="panel-body">Sed ac orci quis tortor imperdiet venenatis. Duis elementum auctor accumsan. 
-      Aliquam in felis sit amet augue.
-    </div>
-  </div>
+    <p>Создайте простой класс используя конструктор <code>Ractive</code>.</p>
+
+    <pre><code class="js">{{ "var ractive = new Ractive({\
+  el: 'container',\
+  template: '<p>{{greeting}}, {{recipient}}!</p><br /><input type=\"text\" value=\"{{greeting}}\" />',\
+  data: { greeting: 'Hello', recipient: 'world' }\
+});" }}</code></pre>
 </div>
 
 <div class="col-sm-7">

@@ -13,6 +13,7 @@
  *= require bootstrap/dist/css/bootstrap
  *= require codemirror
  *= require codemirror/addon/dialog/dialog
+ *= require highlightjs/styles/default
  * require_tree .
  *= require_self
  */

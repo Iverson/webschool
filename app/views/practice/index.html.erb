@@ -4,9 +4,9 @@
   new Views.PracticeSandbox({
     data: {
       tabs: [
-        { name: "index.html", content: "<Codearea lang='text/html' />"},
-        { name: "style.css", content: "<Codearea lang='css' />"},
-        { name: "app.js", content: "<Codearea lang='javascript' />"}
+        { name: "index.html", content: "<Codearea lang='text/html'>" + $('<div/>').text('<div id="container"></div>').html() + "</Codearea>"},
+        { name: "style.css", content: "<Codearea lang='text/css'>.b-news__button {cursor: pointer; text-decoration: underline;}</Codearea>"},
+        { name: "app.js", content: "<Codearea lang='text/javascript'></Codearea>"}
       ],
       template: JST['templates/practice/iframe']()
     }
