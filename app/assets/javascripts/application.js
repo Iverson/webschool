@@ -13,6 +13,7 @@
 //= require jquery/dist/jquery
 //= require bootstrap
 //= require ractive
+//= require ractive-transitions-fade
 //= require mustache.js/mustache.js
 //= require highlightjs/highlight.pack
 //= require codemirror

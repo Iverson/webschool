@@ -36,3 +36,13 @@
     right: 0;
     bottom: 0;
 }
+
+    .b-sandbox .alert {
+        position: absolute;
+        width: 100%;
+        left: 0;
+        top: 41px;
+        border-radius: 0;
+        opacity: 0.9;
+        z-index: 20;
+    }

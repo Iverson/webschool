@@ -15,6 +15,9 @@
       <h2>Write the JavaScript here.</h2>
       <div class="b-sandbox">
         <Tabs items="{{tabs}}" />
+        {{#alert.visible}}
+          <Alert message="{{alert.message}}" type="{{alert.type}}" autoclose="3000" on-teardown="hideAlert" />
+        {{/alert.visible}}
         <button type="button" class="btn btn-primary btn-lg b-sandbox-result__exec" on-click="exec()">Execute (Shift+Enter)</button>
       </div>
 
