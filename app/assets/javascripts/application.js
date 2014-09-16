@@ -16,6 +16,7 @@
 //= require mustache.js/mustache.js
 //= require highlightjs/highlight.pack
 //= require codemirror
+//= require keymaster/keymaster
 //= require emmet-codemirror/dist/emmet
 //= require codemirror/keymap/sublime
 //= require codemirror/mode/javascript/javascript

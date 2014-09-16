@@ -4,11 +4,3 @@ describe("A suite", function() {
     expect(ractive.get("recipient")).toBe("world");
   });
 });
-
-var reporter = new jasmine.JSReporter2();
-
-reporter.afterDone(function() {
-    console.log(jasmine.jsReport);
-});
-
-jasmine.getEnv().addReporter(reporter);

@@ -4,7 +4,7 @@ Ractive.components.Codearea = Ractive.extend({
         var self = this;
 
         this._textarea = this.find('.b-codearea');
-        this._codeMirror = Services.CodeMirror(this._textarea, this.get('lang'));
+        this._codeMirror = Services.CodeMirrorFactory(this._textarea, this.get('lang'));
 
         this.on('refresh', function() {
             this._codeMirror.refresh();
@@ -18,6 +18,6 @@ Ractive.components.Codearea = Ractive.extend({
         return this._codeMirror.doc.getValue();
     },
     data: {
-        
+
     }
 });

@@ -26,3 +26,13 @@
     width: 100%;
     height: 300px;
 }
+
+.b-sandbox {
+    position: relative;
+}
+
+.b-sandbox-result__exec {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}

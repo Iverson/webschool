@@ -13,9 +13,10 @@
   <div class="row">
     <div class="col-xs-12">
       <h2>Write the JavaScript here.</h2>
-      <Tabs items="{{tabs}}" />
-
-      <p class="text-right"><button type="button" class="btn btn-primary btn-lg b-sandbox-result__exec" on-click="exec()">Run shit!</button></p><br>
+      <div class="b-sandbox">
+        <Tabs items="{{tabs}}" />
+        <button type="button" class="btn btn-primary btn-lg b-sandbox-result__exec" on-click="exec()">Execute (Shift+Enter)</button>
+      </div>
 
       <h2>Result</h2>
       <div class="panel panel-default">
