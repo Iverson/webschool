@@ -13,6 +13,7 @@
  *= require bootstrap/dist/css/bootstrap
  *= require codemirror
  *= require codemirror/addon/dialog/dialog
+ *= require codemirror/addon/lint/lint
  *= require highlightjs/styles/default
  * require_tree .
  *= require_self
@@ -46,3 +47,32 @@
         opacity: 0.9;
         z-index: 20;
     }
+
+.b-tabs {}
+
+    .b-tabs li {
+        position: relative;
+    }
+
+    .b-tabs li.error:before {
+        position: absolute;
+        right: 6px;
+        top: 1px;
+        font-size: 11px;
+        color: #ff0000;
+        content: "Error";
+        z-index: 1;
+    }
+
+.CodeMirror-lint-marker-error:before, .CodeMirror-lint-marker-multiple:before {
+    position: absolute;
+    width: 1000px;
+    height: 100%;
+    background: #ff0000;
+    opacity: 0.2;
+    content: "";
+}
+
+.CodeMirror-lint-marker-multiple:before {
+    background: none;
+}

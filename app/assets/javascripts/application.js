@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery/dist/jquery
+//= require lodash
 //= require bootstrap
 //= require ractive
 //= require ractive-transitions-fade
@@ -27,6 +28,9 @@
 //= require codemirror/addon/edit/closebrackets
 //= require codemirror/addon/fold/foldcode
 //= require codemirror/addon/fold/foldgutter
+//= require jshint/dist/jshint
+//= require codemirror/addon/lint/lint
+//= require codemirror/addon/lint/javascript-lint
 //= require app
 //= require_tree ./services
 //= require_tree ./templates

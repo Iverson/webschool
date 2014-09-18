@@ -23,6 +23,8 @@
     "jasmine": "~2.0.4",
     "jasmine-jsreporter-real": "*",
     "keymaster": "~1.6.2",
-    "ractive-transitions-fade": "~0.1.2"
+    "ractive-transitions-fade": "~0.1.2",
+    "lodash": "~2.4.1",
+    "jshint": "~2.5.5"
   }
 }

@@ -2,12 +2,16 @@ Ractive.components.Tabs = Ractive.extend({
     template: JST['templates/components/tabs'](),
 
     init: function() {
-        this.on('selectTab', function(evt) {
-            var index = evt.node.getAttribute( 'data-index' );
-            this.set('activeIndex', index);
+        this.on('selectTab', function(evt, index) {
 
+            this.showTab(index);
+            
             return false;
         });
+    },
+
+    showTab: function(index) {
+        this.set('activeIndex', index);
     },
     
     data: {

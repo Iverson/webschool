@@ -1,12 +1,12 @@
-<ul class="nav nav-tabs" role="tablist">
+<ul class="nav nav-tabs b-tabs" role="tablist">
   {{#tabs:i}}
-    <li class="{{isActive(i) ? 'active' : ''}}"><a href="#" on-click="selectTab" data-index="{{i}}">{{name}}</a></li>
+    <li class="{{isActive(i) ? 'active' : ''}} {{valid ? '' : 'error'}}"><a href="#" on-click="selectTab:{{i}}" data-index="{{i}}">{{name}}</a></li>
   {{/tabs}}
 </ul>
 <div class="tab-content">
   {{#tabs:i}}
     {{setPartial(content)}}
-    <div class="tab-pane {{isActive(i) ? 'active' : ''}}" id="js">
+    <div class="tab-pane {{isActive(i) ? 'active' : ''}} {{valid ? '' : 'error'}}">
       {{>tabContent}}
     </div>
   {{/tabs}}

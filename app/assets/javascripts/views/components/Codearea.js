@@ -17,6 +17,11 @@ Ractive.components.Codearea = Ractive.extend({
     value: function() {
         return this._codeMirror.doc.getValue();
     },
+    isValid: function() {
+        CodeMirror.signal(this._codeMirror, 'validate', this._codeMirror);
+        
+        return !this._codeMirror.state.lint || !this._codeMirror.state.lint.marked.length;
+    },
     data: {
 
     }
