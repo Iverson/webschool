@@ -18,7 +18,7 @@
     "codemirror": "~4.5.0",
     "emmet-codemirror": "emmetio/codemirror",
     "mustache.js": "~0.8.2",
-    "ractive": "edge",
+    "ractive": "",
     "highlightjs": "~8.0.0",
     "jasmine": "~2.0.4",
     "jasmine-jsreporter-real": "*",

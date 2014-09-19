@@ -1,4 +1,4 @@
-(function(global, EventProxy, Alert, Key) {
+(function(global, EventProxy, Key) {
     "use strict";
 
     Views.PracticeSandbox = Ractive.extend({
@@ -9,7 +9,6 @@
             this._codeAreas = this.findAllComponents('Codearea');
             this._tabs = this.findComponent('Tabs');
             this._iframe = this.find('.b-sandbox-result');
-            this._invalidFilesIndexes = [];
 
             Key("shift+enter", this.exec.bind(this));
             EventProxy.on('sandboxExec', this.exec.bind(this));
@@ -18,16 +17,17 @@
         },
 
         runCode: function() {
-            var iframe_window = this._iframe.contentWindow;
+            var iframe_document = this._iframe.contentWindow.document;
+
             var content = Mustache.render(this.get('template'), {
                 html: this._codeAreas[0].value(),
                 css: this._codeAreas[1].value(),
                 js: this._codeAreas[2].value()
             });
 
-            iframe_window.document.open();
-            iframe_window.document.write(content);
-            iframe_window.document.close();
+            iframe_document.open();
+            iframe_document.write(content);
+            iframe_document.close();
         },
 
         validate: function() {
@@ -50,8 +50,13 @@
         },
 
         exec: function() {
+            var first_invalid_tab_index;
+
             if (this.validate()) {
                 this.runCode();
+            } else {
+                first_invalid_tab_index = _.findIndex(this.data.tabs, { 'valid': false });
+                this._tabs.showTab(first_invalid_tab_index);
             }
         },
 
@@ -95,4 +100,4 @@
         }
 
     });
-})(window, Services.EventProxy, Services.Alert, key);
+})(window, Services.EventProxy, key);
