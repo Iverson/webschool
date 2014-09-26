@@ -10,25 +10,6 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery/dist/jquery
-//= require bootstrap
-//= require ractive
-//= require ractive-transitions-fade
-//= require mustache.js/mustache.js
-//= require highlightjs/highlight.pack
-//= require keymaster/keymaster
-//= require codemirror
-//= require emmet-codemirror/dist/emmet
-//= require codemirror/keymap/sublime
-//= require codemirror/mode/javascript/javascript
-//= require codemirror/mode/css/css
-//= require codemirror/mode/xml/xml
-//= require codemirror/addon/search/search
-//= require codemirror/addon/edit/closebrackets
-//= require codemirror/addon/fold/foldcode
-//= require codemirror/addon/fold/foldgutter
-//= require jshint/dist/jshint
-//= require codemirror/addon/lint/lint
-//= require codemirror/addon/lint/javascript-lint
+//= require vendor
 //= require_tree ./templates
-//= require app
+//= require main

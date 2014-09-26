@@ -14,7 +14,9 @@
     <div class="col-xs-12">
       <h2>Write the JavaScript here.</h2>
       <div class="b-sandbox">
+        {{#tabs.length}}
         <Tabs items="{{tabs}}" />
+        {{/tabs.length}}
         {{#alert.visible}}
           <Alert message="{{alert.message}}" type="{{alert.type}}" autoclose="2000" on-teardown="hideAlert" />
         {{/alert.visible}}
