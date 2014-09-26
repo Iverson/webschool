@@ -64,6 +64,10 @@
         z-index: 1;
     }
 
+    .b-tabs li a {
+        cursor: pointer;
+    }
+
 .CodeMirror-lint-marker-error:before, .CodeMirror-lint-marker-multiple:before {
     position: absolute;
     width: 1000px;

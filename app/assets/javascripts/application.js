@@ -11,14 +11,13 @@
 // about supported directives.
 //
 //= require jquery/dist/jquery
-//= require lodash
 //= require bootstrap
 //= require ractive
 //= require ractive-transitions-fade
 //= require mustache.js/mustache.js
 //= require highlightjs/highlight.pack
-//= require codemirror
 //= require keymaster/keymaster
+//= require codemirror
 //= require emmet-codemirror/dist/emmet
 //= require codemirror/keymap/sublime
 //= require codemirror/mode/javascript/javascript
@@ -31,7 +30,5 @@
 //= require jshint/dist/jshint
 //= require codemirror/addon/lint/lint
 //= require codemirror/addon/lint/javascript-lint
-//= require app
-//= require_tree ./services
 //= require_tree ./templates
-//= require_tree ./views
+//= require app

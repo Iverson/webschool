@@ -1,6 +1,6 @@
 <ul class="nav nav-tabs b-tabs" role="tablist">
   {{#tabs:i}}
-    <li class="{{isActive(i) ? 'active' : ''}} {{valid ? '' : 'error'}}"><a href="#" on-click="showTab(i)">{{name}}</a></li>
+    <li class="{{isActive(i) ? 'active' : ''}} {{valid ? '' : 'error'}}"><a on-click="showTab(i)">{{name}}</a></li>
   {{/tabs}}
 </ul>
 <div class="tab-content">

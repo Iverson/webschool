@@ -1,10 +1,12 @@
+var CodeMirrorFactory = require('../../services/CodeMirrorFactory');
+
 Ractive.components.Codearea = Ractive.extend({
     template: JST['templates/components/codearea'](),
     init: function () {
         var self = this;
 
         this._textarea = this.find('.b-codearea');
-        this._codeMirror = Services.CodeMirrorFactory(this._textarea, this.get('lang'));
+        this._codeMirror = CodeMirrorFactory(this._textarea, this.get('lang'));
 
         this.on('refresh', function() {
             this._codeMirror.refresh();

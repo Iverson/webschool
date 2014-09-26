@@ -25,6 +25,7 @@
     "keymaster": "~1.6.2",
     "ractive-transitions-fade": "~0.1.2",
     "lodash": "~2.4.1",
-    "jshint": "~2.5.5"
+    "jshint": "~2.5.5",
+    "q": "~1.0.1"
   }
 }

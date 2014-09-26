@@ -19,4 +19,5 @@ config/database.yml
 public/assets
 public/system
 .DS_Store
+node_modules
 /vendor/assets/components

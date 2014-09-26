@@ -1,103 +1,171 @@
-(function(global, EventProxy, Key) {
-    "use strict";
+"use strict";
 
-    Views.PracticeSandbox = Ractive.extend({
-        el: '.b-practice',
-        template: JST['templates/practice/sandbox'](),
+var Q = require('q');
+var _ = require('lodash/dist/lodash.compat');
+var Key = require('../../../../../vendor/assets/components/keymaster/keymaster');
+var EventProxy = require('../../services/EventProxy');
+var SandboxLauncher = require('../../services/SandboxLauncher');
+var Practice = require('../../models/Practice');
 
-        init: function() {
-            this._codeAreas = this.findAllComponents('Codearea');
-            this._tabs = this.findComponent('Tabs');
-            this._iframe = this.find('.b-sandbox-result');
 
-            Key("shift+enter", this.exec.bind(this));
-            EventProxy.on('sandboxExec', this.exec.bind(this));
-            EventProxy.on('sandboxExecuted', this.showReport.bind(this));
-            this.on('hideAlert', this.hideReport.bind(this));
-        },
+var PracticeSandbox = Ractive.extend({
+    el: '.b-practice',
+    template: JST['templates/practice/sandbox'](),
 
-        runCode: function() {
-            var iframe_document = this._iframe.contentWindow.document;
+    init: function() {
+        var practice = new Practice(this.data.practice);
 
-            var content = Mustache.render(this.get('template'), {
-                html: this._codeAreas[0].value(),
-                css: this._codeAreas[1].value(),
-                js: this._codeAreas[2].value()
+        this.set('practice', practice);
+        this._codeAreas = this.findAllComponents('Codearea', {live: true});
+        this._tabs = this.findComponent('Tabs');
+        this._iframe = this.find('.b-sandbox-result');
+
+        Key("shift+enter", this.exec.bind(this));
+        EventProxy.on('sandboxExec', this.exec.bind(this));
+        EventProxy.on('sandboxExecuted', this.showReport.bind(this));
+        this.on('hideAlert', this.hideReport.bind(this));
+
+        this.loadData().then(function(files) {
+            var tabs = this.buildTabs(files);
+            this.set('tabs', tabs);
+        }.bind(this));
+    },
+
+    loadData: function() {
+        var practice = this.data.practice;
+        var deferred = Q.defer();
+        var ractive = this;
+
+        $.getJSON(practice.configPath(), function(config) {
+            var promises = [],
+                files = [];
+
+            _.each(config.files, function(filename) {
+                var file = {name: filename};
+                var file_path = practice.filePath(filename);
+                var deferred = Q.defer();
+                var promise = deferred.promise;
+
+                promises.push(promise);
+                
+                $.get(file_path, function(data) {
+                    file.text = data;
+                    files.push(file);
+                    deferred.resolve();
+                });
             });
 
-            iframe_document.open();
-            iframe_document.write(content);
-            iframe_document.close();
-        },
-
-        validate: function() {
-            var is_valid = true;
-            var item_is_valid;
-            var self = this;
-
-            _.each(this._codeAreas, function(code, i) {
-                item_is_valid = code.isValid();
-
-
-                if (!item_is_valid) {
-                    is_valid = false;
-                }
-
-                self.set('tabs.' + i + '.valid', item_is_valid);
+            Q.all(promises).then(function() {
+                deferred.resolve(files);
             });
+        });
 
-            return is_valid;
-        },
+        return deferred.promise;
+    },
 
-        exec: function() {
-            var first_invalid_tab_index;
+    buildTabs: function(files) {
+        return files.map(function(file) {
+            var ext = file.name.split('.').pop();
+            file.content = "<Codearea lang='" + ext + "'>" + _.escape(file.text) + "</Codearea>";
+            file.valid = true;
 
-            if (this.validate()) {
-                this.runCode();
-            } else {
-                first_invalid_tab_index = _.findIndex(this.data.tabs, { 'valid': false });
-                this._tabs.showTab(first_invalid_tab_index);
+            return file;
+        });
+    },
+
+    codeareasArrange: function() {
+        var files = {};
+
+        _.each(this._codeAreas, function(item) {
+            var lang = item.get('lang');
+            files[lang] = files[lang] || [];
+            files[lang].push(item.value());
+        });
+
+        return files;
+    },
+
+    runCode: function() {
+        var files = this.codeareasArrange();
+        var practice = this.get('practice');
+
+        SandboxLauncher.run(files, practice, this._iframe);
+    },
+
+    validate: function() {
+        var is_valid = true;
+        var item_is_valid;
+        var self = this;
+
+        _.each(this._codeAreas, function(code, i) {
+            item_is_valid = code.isValid();
+
+
+            if (!item_is_valid) {
+                is_valid = false;
             }
-        },
 
-        buildReportMessage: function(report) {
-            var message,
-                type;
+            self.set('tabs.' + i + '.valid', item_is_valid);
+        });
 
-            if (!report.passed) {
-                type = "danger";
-                message = report.suites[0].specs[0].failures[0].message;
-            } else {
-                type = "success";
-                message = "Good job!";
-            }
+        return is_valid;
+    },
 
-            return {message: message, type: type};
-        },
+    exec: function() {
+        var first_invalid_tab_index;
 
-        showReport: function(event, data) {
-            var report = this.buildReportMessage(data);
+        if (this.validate()) {
+            this.runCode();
+        } else {
+            first_invalid_tab_index = _.findIndex(this.data.tabs, { 'valid': false });
+            this._tabs.showTab(first_invalid_tab_index);
+        }
+    },
 
-            this.set({
-                "alert.visible": true,
-                "alert.message": report.message,
-                "alert.type": report.type,
-            });
-        },
+    buildReportMessage: function(report) {
+        var message,
+            type;
 
-        hideReport: function() {
-            this.set("alert.visible", false);
-        },
-
-        data: {
-            alert: {
-                visible: false,
-                message: null,
-                type: null
-            },
-            tabs: [],
-            template: ''
+        if (!report.passed) {
+            type = "danger";
+            message = report.suites[0].specs[0].failures[0].message;
+        } else {
+            type = "success";
+            message = "Good job!";
         }
 
-    });
-})(window, Services.EventProxy, key);
+        return {message: message, type: type};
+    },
+
+    showReport: function(event, data) {
+        var report = this.buildReportMessage(data);
+
+        this.set('alert', {
+            visible: true,
+            message: report.message,
+            type: report.type
+        });
+    },
+
+    hideReport: function() {
+        this.set("alert.visible", false);
+    },
+
+    data: {
+        alert: {
+            visible: false,
+            message: null,
+            type: null
+        },
+        tabs: [],
+        template: '',
+        practice: {}
+    },
+
+    computed: {
+        
+    }
+
+});
+
+module.exports = PracticeSandbox;

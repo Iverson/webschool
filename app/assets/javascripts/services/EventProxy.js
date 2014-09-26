@@ -1,22 +1,18 @@
-(function(globalDispatcher, Services, $) {
-    "use strict";
+"use strict";
 
-    function EventProxy(el, lang) {
-        if ( EventProxy.prototype._singletonInstance ) {
-          return EventProxy.prototype._singletonInstance;
-        }
-        EventProxy.prototype._singletonInstance = this;
+var globalDispatcher = window.document;
+
+function EventProxy(el, lang) {
+}
+
+EventProxy.prototype = {
+    fire: function(event, params, element) {
+        $(globalDispatcher).trigger(event, params);
+    },
+
+    on: function(event, callback) {
+        $(globalDispatcher).on(event, callback);
     }
+};
 
-    EventProxy.prototype = {
-        fire: function(event, params, element) {
-            $(globalDispatcher).trigger(event, params);
-        },
-
-        on: function(event, callback) {
-            $(globalDispatcher).on(event, callback);
-        }
-    };
-
-    Services.EventProxy = new EventProxy();
-})(window.document, Services, $);
+module.exports = new EventProxy();
