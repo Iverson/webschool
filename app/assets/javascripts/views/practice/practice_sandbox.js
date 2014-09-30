@@ -1,8 +1,8 @@
 "use strict";
 
-var Q = require('q');
+var Q = require('q/q');
 var _ = require('lodash/dist/lodash.compat');
-var Key = require('../../../../../vendor/assets/components/keymaster/keymaster');
+var Key = require('keymaster/keymaster');
 var EventProxy = require('../../services/EventProxy');
 var SandboxLauncher = require('../../services/SandboxLauncher');
 var Practice = require('../../models/Practice');
@@ -11,13 +11,14 @@ var Practice = require('../../models/Practice');
 var PracticeSandbox = Ractive.extend({
     el: '.b-practice',
     template: JST['templates/practice/sandbox'](),
+    debug: true,
 
     init: function() {
         var practice = new Practice(this.data.practice);
 
         this.set('practice', practice);
         this._codeAreas = this.findAllComponents('Codearea', {live: true});
-        this._tabs = this.findComponent('Tabs');
+        this._tabs = this.findAllComponents('Tabs', {live: true});
         this._iframe = this.find('.b-sandbox-result');
 
         Key("shift+enter", this.exec.bind(this));
@@ -90,6 +91,12 @@ var PracticeSandbox = Ractive.extend({
         var practice = this.get('practice');
 
         SandboxLauncher.run(files, practice, this._iframe);
+        this._controlsDisable();
+        this.set('submitLoader', true);
+    },
+
+    _controlsDisable: function() {
+
     },
 
     validate: function() {
@@ -118,7 +125,7 @@ var PracticeSandbox = Ractive.extend({
             this.runCode();
         } else {
             first_invalid_tab_index = _.findIndex(this.data.tabs, { 'valid': false });
-            this._tabs.showTab(first_invalid_tab_index);
+            this._getTabs().showTab(first_invalid_tab_index);
         }
     },
 
@@ -140,15 +147,23 @@ var PracticeSandbox = Ractive.extend({
     showReport: function(event, data) {
         var report = this.buildReportMessage(data);
 
-        this.set('alert', {
-            visible: true,
-            message: report.message,
-            type: report.type
+        this.set(
+        {
+            submitLoader: false,
+            alert: {
+                visible: true,
+                message: report.message,
+                type: report.type
+            }
         });
     },
 
     hideReport: function() {
         this.set("alert.visible", false);
+    },
+
+    _getTabs: function() {
+        return this._tabs[0];
     },
 
     data: {
@@ -159,11 +174,11 @@ var PracticeSandbox = Ractive.extend({
         },
         tabs: [],
         template: '',
-        practice: {}
-    },
-
-    computed: {
-        
+        practice: {},
+        submitLoader: false,
+        isSubmitLoader: function() {
+            return this.get('submitLoader');
+        }
     }
 
 });

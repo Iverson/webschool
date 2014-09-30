@@ -1,7 +1,12 @@
 {
   "name": "webschool",
-  "devDependencies" : {
-    "browserify": "~> 4.1"
+  "devDependencies": {
+    "browserify": "~> 4.1",
+    "karma": "^0.12.23",
+    "karma-chrome-launcher": "^0.1.4",
+    "karma-commonjs": "0.0.12",
+    "karma-ejs-preprocessor": "^0.2.0",
+    "karma-jasmine": "^0.1.5"
   },
   "license": "MIT",
   "engines": {

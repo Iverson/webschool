@@ -80,3 +80,16 @@
 .CodeMirror-lint-marker-multiple:before {
     background: none;
 }
+
+.btn.loading {
+    color: rgba(0, 0, 0, 0);
+}
+
+.btn.loading:before {
+    left: 0;
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    content: "Loading...";
+    color: #fff;
+}
