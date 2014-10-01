@@ -6,10 +6,15 @@
     "karma-chrome-launcher": "^0.1.4",
     "karma-commonjs": "0.0.12",
     "karma-ejs-preprocessor": "^0.2.0",
-    "karma-jasmine": "^0.1.5"
+    "karma-jasmine": "^0.1.5",
+    "karma-ng-scenario": "^0.1.0"
   },
   "license": "MIT",
   "engines": {
     "node": ">= 0.10"
+  },
+  "scripts": {
+    "test:unit": "karma start app/assets/javascripts/test/config/karma.conf.js",
+    "test:e2e": "protractor app/assets/javascripts/test/config/protractor-e2e.conf.js"
   }
 }

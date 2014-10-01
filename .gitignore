@@ -20,4 +20,5 @@ public/assets
 public/system
 .DS_Store
 node_modules
+npm-debug.log
 /vendor/assets/components
