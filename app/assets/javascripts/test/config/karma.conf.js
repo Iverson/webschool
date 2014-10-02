@@ -15,7 +15,7 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      '../../../vendor/assets/components/{lodash/dist,mustache.js,ractive,q,keymaster}/*.js',
+      '../../../vendor/assets/components/{lodash/dist,mustache.js,ractive,q,keymaster,jquery/dist}/*.js',
       'services/*.js',
       'models/*.js',
       'templates/**/*.ejs',
@@ -35,7 +35,7 @@ module.exports = function(config) {
     preprocessors: {
         '**/*.ejs': ['ejs'],
         '**/*.js': ['commonjs'],
-        '../../../vendor/assets/components/{lodash/dist,mustache.js,ractive,q,keymaster}/*.js': ['commonjs']
+        '../../../vendor/assets/components/{lodash/dist,mustache.js,ractive,q,keymaster,jquery/dist}/*.js': ['commonjs']
     },
 
     commonjsPreprocessor: {
